@@ -1,10 +1,10 @@
 from django.http import request
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, DetailView, UpdateView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
 from common.utils import get_profile, get_receipts
-from recipes.forms import RecipeCreateForm, RecipeEditForm
+from recipes.forms import RecipeCreateForm, RecipeEditForm, DeleteRecipeForm
 from recipes.models import Recipes
 
 
@@ -48,3 +48,16 @@ class RecipeEditView(UpdateView):
     def get_queryset(self):
         pk = self.kwargs.get('pk')
         return Recipes.objects.filter(pk=pk)
+
+
+class DeleteRecipeView(DeleteView):
+    template_name = 'delete-recipe.html'
+    success_url = reverse_lazy('catalog')
+    form_class = DeleteRecipeForm
+    model = Recipes
+
+    def get_initial(self):
+        return self.object.__dict__
+
+    def form_invalid(self, form):
+        return self.form_valid(form)

@@ -50,8 +50,7 @@
         <!-- Edit/Delete buttons -->
         <div class="buttons">
             <a href="{% url 'edit-recipe' recipes.pk %}" class="edit-button">Edit</a>
-            <a href="#" class="delete-button">Delete</a>
-        </div>
+            <a href="{% url 'delete-recipe' recipes.pk %}" class="delete-button">Delete</a>
         </div>
     </section>
 

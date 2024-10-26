@@ -1,5 +1,6 @@
 from django import forms
 
+from common.mixins import ReadOnlyMixin
 from recipes.models import Recipes
 
 
@@ -16,3 +17,6 @@ class RecipeCreateForm(forms.ModelForm):
 
 class RecipeEditForm(RecipeCreateForm):
     pass
+
+class DeleteRecipeForm(ReadOnlyMixin, RecipeCreateForm):
+    read_only_fields = ['title', 'cuisine_type', 'ingredients', 'instructions', 'cooking_time', 'image_url']
