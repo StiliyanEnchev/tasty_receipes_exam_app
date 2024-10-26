@@ -12,3 +12,7 @@ class ProfileCreateForm(ProfileBaseForm):
     class Meta:
         model = Profile
         exclude = ['bio']
+
+
+class ProfileEditForm(ProfileBaseForm):
+    pass
