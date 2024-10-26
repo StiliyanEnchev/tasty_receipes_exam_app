@@ -12,3 +12,4 @@ class RecipeCreateForm(forms.ModelForm):
             'instructions': forms.Textarea(attrs={'placeholder': 'Enter detailed instructions here...'}),
             'ingredients': forms.Textarea(attrs={'placeholder': "ingredient1, ingredient2, ..."}),
         }
+

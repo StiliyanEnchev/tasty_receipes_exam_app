@@ -6,5 +6,5 @@ def get_profile():
     return Profile.objects.first()
 
 
-def get_cars():
+def get_receipts():
     return Recipes.objects.all()
