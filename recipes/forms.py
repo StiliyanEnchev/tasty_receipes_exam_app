@@ -13,3 +13,6 @@ class RecipeCreateForm(forms.ModelForm):
             'ingredients': forms.Textarea(attrs={'placeholder': "ingredient1, ingredient2, ..."}),
         }
 
+
+class RecipeEditForm(RecipeCreateForm):
+    pass

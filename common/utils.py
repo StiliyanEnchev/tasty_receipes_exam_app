@@ -8,3 +8,7 @@ def get_profile():
 
 def get_receipts():
     return Recipes.objects.all()
+
+def get_specific_recipt(self, pk):
+    pk = self.kwargs.get('pk')
+    return Recipes.objects.filter(pk=pk)

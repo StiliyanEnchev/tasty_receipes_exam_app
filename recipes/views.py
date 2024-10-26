@@ -1,9 +1,10 @@
+from django.http import request
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, DetailView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView
 
 from common.utils import get_profile, get_receipts
-from recipes.forms import RecipeCreateForm
+from recipes.forms import RecipeCreateForm, RecipeEditForm
 from recipes.models import Recipes
 
 
@@ -26,4 +27,24 @@ class RecipeCatalog(ListView):
 
 class RecipeDetailsView(DetailView):
     template_name = 'details-recipe.html'
-    queryset = get_receipts()
+    model = Recipes
+    def get_queryset(self):
+        pk = self.kwargs.get('pk')
+        return Recipes.objects.filter(pk=pk)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        ingredients = self.object.ingredients
+        context['ingredient_list'] = ingredients.split(', ')
+
+        return context
+
+class RecipeEditView(UpdateView):
+    template_name = 'edit-recipe.html'
+    model = Recipes
+    form_class = RecipeEditForm
+    success_url = reverse_lazy('catalog')
+    def get_queryset(self):
+        pk = self.kwargs.get('pk')
+        return Recipes.objects.filter(pk=pk)
